@@ -1,0 +1,71 @@
+*{
+    font-family: 'Exo 2', 'sans-serif';
+}
+.big-container{
+    height: 100vh;
+    background-color: rgb(197, 184, 109);
+    background-image: linear-gradient(45deg, rgb(197, 184, 109), rgb(40, 40, 177));
+}
+.output{
+    background: black;
+    grid-column: 1 / -1;
+    color: whitesmoke;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: column;
+    word-wrap: break-word;
+    word-break: break-all;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.output .previous-input{
+    font-size: 1rem;
+    color: rgba(202, 202, 202, 0.6);
+}
+.output .next-input{
+    font-size: 2rem;
+}
+.calculator-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 10px;   
+    transform: translate(-50%, -50%);
+    width: 390px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows:minmax(120px, auto) repeat(6, 90px);
+    row-gap: 0px;
+}
+
+#row-span-2{
+    grid-row-start: 5;
+    grid-row-end: 8;
+    grid-column-start: 4;
+    grid-column-end: 5;
+    
+}
+button{
+    cursor: pointer;
+    border: 1px solid rgb(148, 146, 146);
+    background-color: rgba(70, 45, 138, 0.5);
+    color: rgb(207, 214, 219);
+}
+
+button:hover{
+    background-color: rgb(190, 202, 202);
+    color: black;
+}
+
+button#row-span-2, button#square-root, button#power-function,
+button#modulo, button#decimal{
+    background-color: rgba(100, 38, 38, 0.7);
+}
+button#row-span-2:hover, button#square-root:hover, button#power-function:hover,
+button#modulo:hover, button#decimal:hover{
+    background-color: rgb(55, 83, 83);
+    color: white;
+}
