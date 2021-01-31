@@ -54,7 +54,7 @@ functions.forEach(member => {
     member.addEventListener('click', () => {
         firstEntry = true;
         var operation = member.innerHTML.toString();
-        if (hasEntered) {
+        if (hasEntered) {            
             opStack.push(nextOperand.innerHTML.toString());
             opStack.push(operation);
             previousOperand.innerHTML = previousOperand.innerHTML.toString().concat(nextOperand.innerHTML.toString(), " " , member.innerHTML.toString(), " ");
@@ -67,8 +67,7 @@ functions.forEach(member => {
             opStack.push(operation);
             previousOperand.innerHTML = temp;
         }
-            
-        console.log(opStack.length)
+        
         if (opStack.length >=  3) {
             opStack = compute(opStack);
             opStack.push(member.innerHTML.toString());
@@ -77,7 +76,24 @@ functions.forEach(member => {
     });
 });
 
-
+equalsButton.addEventListener('click', () => {
+    if (nextOperand.innnerHTML == ''){
+        return;
+    } 
+    if (hasEntered) {
+        opStack.push(nextOperand.innerHTML.toString()); 
+        opStack = compute(opStack);
+        nextOperand.innerHTML = opStack[0];
+        opStack = new Array();
+        previousOperand.innerHTML = '';
+        firstEntry = true;
+        return;
+    }
+    nextOperand.innerHTML = opStack[0];
+    opStack = new Array();
+    previousOperand.innerHTML = '';
+    firstEntry = true;
+});
 function compute(opStack) {
     var operation = opStack[1];
     var result;
@@ -85,11 +101,23 @@ function compute(opStack) {
         case ('+'): result = parseFloat(opStack[0]) + parseFloat(opStack[2]);break;
         case ('-'): result = parseFloat(opStack[0]) - parseFloat(opStack[2]);break;
         case ('x'): result = parseFloat(opStack[0]) * parseFloat(opStack[2]);break;
-        case ('/'): result = parseFloat(opStack[0]) / parseFloat(opStack[2]);break;
+        case ('/'):
+            if (opStack[2] != '0') {
+                result = parseFloat(opStack[0]) / parseFloat(opStack[2]);
+            }
+            else {
+                result = Infinity;
+                opStack = new Array();
+                previousOperand.innerHTML = '';
+            } 
+            break;
         default: return; 
     }
+    console.log(result);
     opStack = new Array();
+    console.log(opStack);
     opStack.push(result);
+    console.log(opStack)
     hasEntered = false;
     return opStack;  
 }
