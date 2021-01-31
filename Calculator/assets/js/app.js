@@ -111,13 +111,13 @@ function compute(opStack) {
                 previousOperand.innerHTML = '';
             } 
             break;
+        case ('%'):
+            result = parseInt(opStack[0]) % parseFloat(opStack[2]);
+            break;
         default: return; 
     }
-    console.log(result);
-    opStack = new Array();
-    console.log(opStack);
+    opStack = new Array();   
     opStack.push(result);
-    console.log(opStack)
     hasEntered = false;
     return opStack;  
 }

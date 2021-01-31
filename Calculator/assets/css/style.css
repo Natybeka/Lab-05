@@ -43,7 +43,7 @@
 
 #row-span-2{
     grid-row-start: 5;
-    grid-row-end: 8;
+    grid-row-end: 7;
     grid-column-start: 4;
     grid-column-end: 5;
     
@@ -61,11 +61,11 @@ button:hover{
 }
 
 button#row-span-2, button#square-root, button#power-function,
-button#modulo, button#decimal{
+button#modulo, button#decimal, button#zero-btn{
     background-color: rgba(100, 38, 38, 0.7);
 }
 button#row-span-2:hover, button#square-root:hover, button#power-function:hover,
-button#modulo:hover, button#decimal:hover{
+button#modulo:hover, button#decimal:hover, button#zero-btn:hover{
     background-color: rgb(55, 83, 83);
     color: white;
 }
