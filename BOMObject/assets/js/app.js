@@ -92,6 +92,16 @@ function filterTasks(e) {
     
     
     */
+    var items = document.querySelectorAll('.collection-item');
+    items.forEach(node => {
+        var search = filter.value.toString();
+        if (node.childNodes[0].nodeValue.toString().includes(search)) {
+            node.style.display = 'block';
+        }
+        else {
+            node.style.display = 'none';
+        }
+    });
 
 }
 
