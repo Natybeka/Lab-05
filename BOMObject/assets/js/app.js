@@ -4,9 +4,10 @@ const form = document.querySelector('#task-form'); //The form at the top
 const filter = document.querySelector('#filter'); //the task filter text field
 const taskList = document.querySelector('.collection'); //The UL
 const clearBtn = document.querySelector('.clear-tasks'); //the all task clear button
-
+const sortAscending = document.querySelector('#ascending');
+const sortDescending = document.querySelector('#descending');
 const reloadIcon = document.querySelector('.fa'); //the reload button at the top navigation 
-
+var globalTaskList = new Array();
 // Add Event Listener  [Form , clearBtn and filter search input ]
 
 // form submit 
@@ -52,11 +53,18 @@ function addNewTask(e) {
     li.appendChild(link);
     // Append to UL 
     taskList.appendChild(li);
-
-
-
-
+    globalTaskList.push(Task(new Date().getTime(), li));
+    
 }
+
+var Task = function(date, li){
+    var obj = {};
+    obj.date = date;
+    obj.li = li;
+    return obj;
+};
+
+
 
 
 
@@ -122,3 +130,50 @@ function reloadPage() {
     //using the reload fun on location object 
     location.reload();
 }
+
+
+
+// function sortAscending(dateArray) {
+//     for(let i = 0; i < dateArray.length;i++) {
+//         for(let j = i + 1; dateArray[j] < dateArray[j - 1]; j--){
+//             var swap = dateArray[j];
+//             dateArray[j] = dateArray[j - 1];
+//             dateArray[j - 1] = swap;
+//         }
+//     }
+// }
+
+// function sortDescending(dateArray) {
+//     for(let i = 0; i < dateArray.length;i++) {
+//         var currentMax = dateArray[i];
+//         var currentMaxIndex = i;
+//         for(let j = i + 1; j < dateArray.length; j++){
+//             if (dateArray[j] > currentMax){ 
+//                 currentMaxIndex = j;
+//             }        
+//         }
+//         if (i !== currentMaxIndex) {
+//             var swap = dateArray[i];
+//             dateArray[i] = dateArray[currentMaxIndex];
+//             dateArray[currentMaxIndex] = swap;
+//         }   
+//     }
+// }
+globalTaskList.sort((a, b) => {
+    if (a.date < b.date) return -1;
+    else return 1;
+});
+sortAscending.addEventListener('click', () => { 
+    clearAllTasks();
+    globalTaskList.forEach(node => {
+        taskList.appendChild(node.li);
+    })
+});
+
+sortDescending.addEventListener('click', () => {
+    globalTaskList.sort()
+    clearAllTasks();
+    for(let i = globalTaskList.length - 1; i >= 0;i--){
+        taskList.appendChild(globalTaskList[i].li);
+    } 
+});
